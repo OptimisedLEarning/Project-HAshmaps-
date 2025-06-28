@@ -2,23 +2,16 @@
 
 What is this project?
 You’re going to build your own HashMap class in JavaScript.
-
 A HashMap is a data structure that:
-
 Stores key → value pairs (like apple → red)
-
 Uses a hash function to decide where to store the key
-
 Is very fast to get, set, or remove values
-
-You're not allowed to use JavaScript's built-in Map or Object for this. You will build everything from scratch.
+You're not allowed to use JavaScript's built-in Map or Object for this.
+You will build everything from scratch.
 
 🧱 Project Structure
 You will have:
 
-cpp
-Copy
-Edit
 /project-folder
 │
 ├── HashMap.js // Your HashMap class
@@ -30,12 +23,10 @@ But in this project, you must not allow going beyond the array size.
 
 Always write:
 
-js
-Copy
-Edit
 if (index < 0 || index >= buckets.length) {
 throw new Error("Trying to access index out of bounds");
 }
+
 This keeps your hash map limited to its current size unless you manually expand it.
 
 🧮 STEP 1: Start Your HashMap Class
@@ -43,9 +34,6 @@ Create a file called HashMap.js.
 
 Inside it, write a class with these basic properties:
 
-js
-Copy
-Edit
 class HashMap {
 constructor(initialCapacity = 16, loadFactor = 0.75) {
 this.buckets = new Array(initialCapacity); // Your storage array
@@ -54,12 +42,10 @@ this.loadFactor = loadFactor; // When to expand
 this.size = 0; // Number of keys stored
 }
 }
+
 🔐 STEP 2: Write the Hash Function
 Add a hash() method inside your class:
 
-js
-Copy
-Edit
 hash(key) {
 let hashCode = 0;
 const prime = 31;
@@ -68,23 +54,19 @@ hashCode = (prime \* hashCode + key.charCodeAt(i)) % this.capacity;
 }
 return hashCode;
 }
-This takes a string key (like "apple") and turns it into a number (like 5)
 
+This takes a string key (like "apple") and turns it into a number (like 5)
 % this.capacity makes sure the number fits in your bucket array
 
 📥 STEP 3: set(key, value)
 This method stores a value in the map.
 
 Basic idea:
-
 Convert the key into an index using the hash() function
 
 If the bucket is empty, store the key/value
-
 If it's already used (collision), check:
-
 If the key exists → update it
-
 If not → add a new entry (use a linked list or array)
 
 Check if size / capacity > loadFactor. If yes → expand the bucket array
@@ -108,9 +90,7 @@ Return the number of stored key/value pairs.
 
 🧹 STEP 8: clear()
 Remove everything:
-
 Set buckets to a new empty array
-
 Set size to 0
 
 🔑 STEP 9: keys()
@@ -121,27 +101,20 @@ Return an array of all the values.
 
 🧩 STEP 11: entries()
 Return an array of [key, value] pairs like:
-
-js
-Copy
-Edit
 [
 ['apple', 'red'],
 ['banana', 'yellow']
 ]
+
 🚀 STEP 12: Auto-Resize
 When size / capacity becomes greater than loadFactor, resize the hash map:
 
 Create a new buckets array with double capacity
-
 Re-insert all old keys and values using the new hash positions
 
 🧪 STEP 13: Testing
 In a file called test.js:
 
-js
-Copy
-Edit
 const test = new HashMap(); // Or: new HashMap(16, 0.75)
 
 test.set('apple', 'red');
@@ -189,9 +162,6 @@ After resizing or removing, make sure everything still works.
 Try:
 
 Overwriting values
-
 Resizing after moon → silver
-
 Checking updated length
-
 Getting keys, values, entries
